@@ -1,0 +1,30 @@
+
+/* container max height and centering */
+#carouselExample {
+  width: 100%;
+  max-width: 800px; 
+  margin: 10px;
+  border-radius: 10px;
+  overflow: hidden;  
+}
+
+/* set visual height for the inner area but DO NOT override display properties */
+#carouselExample .carousel-inner {
+  max-height: 800px; 
+}
+
+/* images: preserve aspect ratio and fill area without distorting */
+#carouselExample .carousel-item img.slide-img {
+  width: 100%;
+  height: 800px;        
+  object-fit: cover;     
+  display: block;
+}
+
+/* mobile adjustments */
+@media (max-width: 768px) {
+  #carouselExample .carousel-inner,
+  #carouselExample .carousel-item img.slide-img {
+    height: 260px;
+  }
+}
