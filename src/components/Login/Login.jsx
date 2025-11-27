@@ -1,10 +1,13 @@
 import React from 'react'
 import "./Login.css"
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 function Login(){
     const[email, setemail]=useState("");
     const[password, setpassword]=useState("");
-    const[submit, setsubmit]=useState(false)
+    const[submit, setsubmit]=useState(false);
+    const navigate= useNavigate();
+
     function handleLogin(e){
         const {name,value}=e.target;
         if(name==="email"){
@@ -18,8 +21,7 @@ function Login(){
     function handleSubmit(e){
         e.preventDefault();
      setsubmit(true)
-    console.log("email:", email);
-    console.log("password:", password);
+     navigate("/landing")
     }
     
     return(

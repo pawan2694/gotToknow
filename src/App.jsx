@@ -1,13 +1,18 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css'
+import LandingPage from './components/landingpage/LandingPage'
 import LoginPage from './components/loginpage/LoginPage'
-import Footer from './components/NavAndFooter/Footer'
-import Header from './components/NavAndFooter/header'
+
 
 function App() {
   return (
-    <>
-  <LoginPage/>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<LoginPage/>}/>
+        <Route path="/landing" element={<LandingPage/>}/>
+      </Routes>
+
+    </Router>
   )
 }
 
