@@ -1,0 +1,10 @@
+.landing-page {
+    min-height: 100vh;        /* full height layout */
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1;                  /* pushes footer to bottom */
+    padding: 40px 20px;
+}

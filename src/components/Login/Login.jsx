@@ -2,11 +2,13 @@ import React from 'react'
 import "./Login.css"
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 function Login(){
     const[email, setemail]=useState("");
     const[password, setpassword]=useState("");
     const[submit, setsubmit]=useState(false);
     const navigate= useNavigate();
+    const { login } = useAuth();
 
     function handleLogin(e){
         const {name,value}=e.target;
@@ -21,6 +23,7 @@ function Login(){
     function handleSubmit(e){
         e.preventDefault();
      setsubmit(true)
+     login({ email });
      navigate("/landing")
     }
     

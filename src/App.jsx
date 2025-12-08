@@ -1,19 +1,33 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import './App.css'
-import LandingPage from './components/landingpage/LandingPage'
-import LoginPage from './components/loginpage/LoginPage'
 
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./components/context/AuthContext";
+import ProtectedRoute from "./components/context/ProtectedRoute";
+
+import LandingPage from "./components/landingpage/LandingPage";
+import LoginPage from "./components/loginpage/LoginPage";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<LoginPage/>}/>
-        <Route path="/landing" element={<LandingPage/>}/>
-      </Routes>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          {/* public */}
+          <Route path="/" element={<LoginPage />} />
 
-    </Router>
-  )
+          {/* protected */}
+          <Route
+            path="/landing"
+            element={
+              <ProtectedRoute>
+                <LandingPage />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </Router>
+    </AuthProvider>
+  );
 }
 
-export default App
+export default App;
