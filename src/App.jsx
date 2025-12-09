@@ -1,21 +1,19 @@
-
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./components/context/AuthContext";
 import ProtectedRoute from "./components/context/ProtectedRoute";
-
 import LandingPage from "./components/landingpage/LandingPage";
 import LoginPage from "./components/loginpage/LoginPage";
+import Register from "./components/Register/Register";
 
 function App() {
   return (
     <AuthProvider>
       <Router>
         <Routes>
-          {/* public */}
           <Route path="/" element={<LoginPage />} />
+          <Route path="/register" element={<Register />} />
 
-          {/* protected */}
           <Route
             path="/landing"
             element={
