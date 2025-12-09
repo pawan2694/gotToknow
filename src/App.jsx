@@ -5,6 +5,7 @@ import ProtectedRoute from "./components/context/ProtectedRoute";
 import LandingPage from "./components/landingpage/LandingPage";
 import LoginPage from "./components/loginpage/LoginPage";
 import Register from "./components/Register/Register";
+import ImageManager from "./components/ImageManager/ImageManager";
 
 function App() {
   return (
@@ -19,6 +20,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <LandingPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/images"
+            element={
+              <ProtectedRoute>
+                <ImageManager />
               </ProtectedRoute>
             }
           />

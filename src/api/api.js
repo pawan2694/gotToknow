@@ -91,6 +91,32 @@ export const apiService = {
     const response = await api.delete(`/data/${id}`);
     return response.data;
   },
+
+  // Images
+  getAllImages: async (category) => {
+    const url = category ? `/images?category=${category}` : '/images';
+    const response = await api.get(url);
+    return response.data;
+  },
+
+  getImageById: async (id) => {
+    const response = await api.get(`/images/${id}`);
+    return response.data;
+  },
+
+  uploadImage: async (formData) => {
+    const response = await api.post('/images/upload', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  },
+
+  deleteImage: async (id) => {
+    const response = await api.delete(`/images/${id}`);
+    return response.data;
+  }
 };
 
 export default api;

@@ -1,28 +1,71 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Slideer.css";
-import img1 from "../../assets/3b484b7c-96c3-419e-a1b2-12e34bb9cb1c.jpg";
-import img2 from "../../assets/375638.png";
-import img3 from "../../assets/happy_piggirl_by_digitalcirce-d5hjd19.jpg";
+import { apiService } from "../../api/api";
 
 function Slideer() {
+  const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    fetchSliderImages();
+  }, []);
+
+  const fetchSliderImages = async () => {
+    try {
+      setLoading(true);
+      const response = await apiService.getAllImages('slider');
+      if (response.success) {
+        setImages(response.data);
+      }
+    } catch (err) {
+      setError('Failed to load slider images');
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return <div className="text-center p-5">Loading slider...</div>;
+  }
+
+  if (error) {
+    return <div className="text-center text-danger p-5">{error}</div>;
+  }
+
+  if (images.length === 0) {
+    return <div className="text-center p-5">No slider images available</div>;
+  }
+
   return (
     <div
       id="carouselExample"
       className="carousel slide"
-      data-bs-ride="carousel"  
+      data-bs-ride="carousel"
     >
       <div className="carousel-inner">
-        <div className="carousel-item active">
-          <img src={img1} className="d-block w-100 slide-img" alt="slide1" />
-        </div>
-
-        <div className="carousel-item">
-          <img src={img2} className="d-block w-100 slide-img" alt="slide2" />
-        </div>
-
-        <div className="carousel-item">
-          <img src={img3} className="d-block w-100 slide-img" alt="slide3" />
-        </div>
+        {images.map((image, index) => (
+          <div
+            key={image.id}
+            className={`carousel-item ${index === 0 ? 'active' : ''}`}
+          >
+            <img
+              src={`http://localhost:5000${image.filepath}`}
+              className="d-block w-100 slide-img"
+              alt={image.title}
+              onError={(e) => {
+                e.target.src = 'https://via.placeholder.com/800x400?text=Image+Not+Found';
+              }}
+            />
+            {image.title && (
+              <div className="carousel-caption d-none d-md-block">
+                <h5>{image.title}</h5>
+                {image.description && <p>{image.description}</p>}
+              </div>
+            )}
+          </div>
+        ))}
       </div>
 
       <button

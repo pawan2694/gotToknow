@@ -54,6 +54,9 @@ function Header() {
             <li className="nav-item">
               <Link className="nav-link" to="/contact" onClick={closeMenu}>Contact</Link>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/images" onClick={closeMenu}>Images</Link>
+            </li>
 
             {/* Authenticated UI */}
             {isAuthenticated ? (
@@ -86,6 +89,7 @@ function Header() {
         </div>
       </div>
     </nav>
+    
   );
 }
 
